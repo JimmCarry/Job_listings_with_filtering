@@ -4,25 +4,7 @@
       
     </header>
     <ul class="lists">
-      <li v-for="list in lists" :key="list.id">
-        <img :src="list.logo" alt="">
-        <div class="job_info">
-          
-          <div class="top_info">
-            <h2 class="company">{{ list.company }}</h2>
-            <span v-if="list.new" class="new">new!</span>
-            <span v-if="list.featured" class="featured">featured</span>
-          </div>
-          <div>
-            <h1 class="position">{{ list.position }}</h1>
-          </div>
-          <div class="bottom_info">
-            <span class="postedAt">{{ list.postedAt }}</span>
-            <span class="contract">{{ list.contract }}</span>
-            <span class="location">{{ list.location }}</span>
-          </div>
-        </div>
-      </li>
+        <JobList v-for="list in lists" :key="list.id" :list="list" />
     </ul>
   </div>
 </template>
@@ -30,51 +12,27 @@
 <script>
 import { ref } from 'vue'
 import { data } from '@/data.js'
+import JobList from '@/components/JobList.vue'
 
 export default {
+  components: {
+    JobList
+  },
   setup () {
     const lists = ref(data)
-  
+
+    
+    
     return {
-      lists
+      lists,
+      
     }
   }
 }
 </script>
 
 <style lang="scss">
-// # Front-end Style Guide
 
-// ## Layout
-
-// The designs were created to the following widths:
-
-// - Mobile: 375px
-// - Desktop: 1440px
-
-// ## Colors
-
-// ### Primary
-
-// - Desaturated Dark Cyan: hsl(180, 29%, 50%)
-
-// ### Neutral
-
-// - Light Grayish Cyan (Background): hsl(180, 52%, 96%)
-// - Light Grayish Cyan (Filter Tablets): hsl(180, 31%, 95%)
-// - Dark Grayish Cyan: hsl(180, 8%, 52%)
-// - Very Dark Grayish Cyan: hsl(180, 14%, 20%)
-
-// ## Typography
-
-// ### Body Copy
-
-// - Font size: 15px
-
-// ### Headings
-
-// - Family: [Spartan](https://fonts.google.com/specimen/Spartan)
-// - Weights: 500, 700
 body {
   width: 100%;
   height: auto;
@@ -95,6 +53,20 @@ ul li {
   background-position: center;
   background-color: hsl(180, 29%, 50%);
 }
+.tags span a {
+    background-color: hsl(180, 52%, 96%);
+    margin-left: 1rem;
+    padding: 0.5rem;
+    text-decoration: none;
+    border-radius: 0.25rem;
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: hsl(180, 29%, 50%);
+}
+.tags span:hover a {
+  background-color: hsl(180, 29%, 50%);
+  color: hsl(180, 52%, 96%);
+}
 .lists {
   li {
     width: 70%;
@@ -104,6 +76,11 @@ ul li {
     margin-bottom: 1rem;
     border-radius: 0.5rem;
     display: flex;
+    align-items: center;
+    justify-content: space-between;
+    --tw-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+    
   }
   img {
     padding-right: 1.5rem;
@@ -111,6 +88,7 @@ ul li {
   }
 }
 .job_info {
+  display: flex;
   h1 {
     font-size: 1.2rem;
     font-weight: 700;
@@ -160,5 +138,11 @@ ul li {
 }
 .bottom_info {
   color: hsl(180, 8%, 52%);
+}
+.tags {
+  display: flex;
+  ul {
+    display: flex;
+  }
 }
 </style>

@@ -59,6 +59,10 @@ Use this section to recap over some of your major learnings while working throug
 
 To see how you can add code snippets, see below:
 
+
+<span v-if="list.featured" class="featured">featured</span>
+
+
 ```html
 <h1>Some HTML code I'm proud of</h1>
 ```
